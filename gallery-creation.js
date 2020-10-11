@@ -1,35 +1,19 @@
-const images = [
-  {
-    url:
-      'https://images.pexels.com/photos/140134/pexels-photo-140134.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    alt: 'White and Black Long Fur Cat',
-  },
-  {
-    url:
-      'https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    alt: 'Orange and White Koi Fish Near Yellow Koi Fish',
-  },
-  {
-    url:
-      'https://images.pexels.com/photos/219943/pexels-photo-219943.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    alt: 'Group of Horses Running',
-  },
-];
+import images from './gallery-items.js';
 
-const galleryRef = document.getElementById('gallery');
+/* console.log(images); */
+const containerImages = document.querySelector('.js-gallery');
 
-const makeItemGallery = ({ url, alt }) => {
-  return `<li class=itemStyle><img src ="${url}"alt = "${alt}"/></li>`;
+const createImagesGallary = ({ preview, original, description }) => {
+  return `<li class="gallery__item">
+  <a class="gallery__link"
+  href="${original}">
+  <img class="gallery__image"
+  src ="${preview}"
+  data-source="${original}"
+  alt = "${description}"/>
+  </a>
+  </li>`;
 };
-const makeItemsGallery = images.map(makeItemGallery).join('');
+const makeItemsGallery = images.map(createImagesGallary).join('');
 
-galleryRef.insertAdjacentHTML('beforeend', makeItemsGallery);
-
-/* images.forEach(el =>
-  galleryRef.insertAdjacentHTML(
-    'beforeend',
-    `<li class=itemStyle><img src="${el.url}" alt="${el.alt}"></li>`,
-  ),
-); */
-
-/* console.log(makeItemGallery); */
+containerImages.insertAdjacentHTML('beforeend', makeItemsGallery);
